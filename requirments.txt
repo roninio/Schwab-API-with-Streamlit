@@ -2,3 +2,4 @@ schwabdev
 requests
 streamlit
 
+dotenv

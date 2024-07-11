@@ -65,7 +65,7 @@ class Get_option_chain:
 
         pass
 
-    def get_options(self, symbol="SOFI", numdays_start= 0, numdays_end=30) -> pd:
+    def get_options(self, symbol="SOFI", numdays_start= 1, numdays_end=30) -> pd:
         global symbol_price
         symbol = symbol.upper()
         symbol = symbol.strip()
@@ -73,7 +73,7 @@ class Get_option_chain:
         netPercentChange = self.get_symbol(symbol=symbol)
 
         today = datetime.now()
-        future_date = today + timedelta(days=numdays_start)
+        future_date = today 
         future_date = future_date.strftime("%Y-%m-%d")
 
         toDate = today + timedelta(days=numdays_end)
@@ -85,6 +85,8 @@ class Get_option_chain:
             ).json()
             symbol_price = res["underlyingPrice"]
             print(res["symbol"], symbol_price)
+            self.netPercentChange = netPercentChange
+            self.symbol_price = symbol_price
             call_options = res["callExpDateMap"]
             put_options = res["putExpDateMap"]
             call_df = self._create_options_list(call_options)
